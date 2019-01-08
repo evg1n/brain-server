@@ -44,9 +44,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
-    if (req.body.email === db.users[0].email && req.body.password === db.users[0].password) {
-        res.json('success')
-        console.log('success logging in')
+    if (req.body.email === db.users[1].email && req.body.password === db.users[1].password) {
+        res.json(db.users[1]);
+        console.log('success logging in');
     } else {
     res.status(400).json('error logging in');
     }
@@ -84,7 +84,7 @@ app.get('/profile/:id', (req, res) => {
     }
 })
 
-app.post('/image', (req, res) => {
+app.put('/image', (req, res) => {
     const { id } = req.body;
     let found = false;
     db.users.forEach(user => {
