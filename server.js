@@ -23,7 +23,7 @@ const database = knex({
     }
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 // define middleware
 app.use(bodyParser.json());
@@ -34,6 +34,7 @@ app.post('/signin', (req, res) => {signin.doSignIn(req, res, database, bcrypt)})
 app.post('/register', (req, res) => {register.doRegister(req, res, database, bcrypt)});
 app.get('/profile/:id', (req, res) => profile.getProfile(req, res, database));
 app.put('/image', (req, res) => {image.getImage(req, res, database)});
+app.post('/imageurl', (req, res) => {image.callAPI(req, res)});
 
 // listen for requests on port
-app.listen(PORT, () => {console.log('app is listening to port:', PORT);});
+app.listen(PORT || 3000, () => {console.log('app is listening to port:', PORT);});
